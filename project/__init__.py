@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 import os
 
 
@@ -10,9 +11,9 @@ def create_app():
 
     # instantiate the app
     app = Flask(__name__)
-    print(app)
-
-
+   
+    CORS(app)
+    
     # set config
     app_settings = os.getenv('APP_SETTINGS')
     app.config.from_object(app_settings)
