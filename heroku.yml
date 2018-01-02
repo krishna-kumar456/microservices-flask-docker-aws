@@ -1,6 +1,0 @@
-build:
-  docker:
-    web: Dockerfile.web
- post:
-   - python manage.py recreate_db
-   - python manage.py seed_db
