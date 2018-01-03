@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request, render_template
 from project.api.models import User
 from project import db
 from sqlalchemy import exc
-
+from datetime import datetime
 users_blueprint = Blueprint('users', __name__,  template_folder='./templates')
 
 @users_blueprint.route('/ping', methods=['GET'])
@@ -24,10 +24,11 @@ def add_user():
         return jsonify(response_object), 400
     username = post_data.get('username')
     email = post_data.get('email')
+    created_at = datetime.utcnow()
     try:
         user = User.query.filter_by(email=email).first()
         if not user:
-            db.session.add(User(username=username, email=email))
+            db.session.add(User(username=username, email=email, created_at = created_at))
             db.session.commit()
             response_object = {
                 'status': 'success',
