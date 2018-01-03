@@ -27,7 +27,7 @@ def add_user():
     try:
         user = User.query.filter_by(email=email).first()
         if not user:
-            db.session.add(User(username=username, email=email, created_at = created_at))
+            db.session.add(User(username=username, email=email))
             db.session.commit()
             response_object = {
                 'status': 'success',
